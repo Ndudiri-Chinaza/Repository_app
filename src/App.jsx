@@ -1,24 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import Repo from './assets/Repositories'
+import Repo from "./assets/Repositories";
+// import NotFoundPage from './NotFoundPage';
+// import ErrorBoundary from './ErrorBoundary';
+// import ErrorPage from './ErrorPage';
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const userName = "Ndudiri-Chinaza";
+  const username = "Ndudiri-Chinaza";
 
   return (
     <>
-    <div>
-      <Repo userName = {userName}/>
-    </div>
-
-
-      
-         
-        
-  
-      
+      <div className="app">
+        <Repo username={username} />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
