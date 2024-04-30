@@ -1,17 +1,30 @@
-import Repo from "./assets/Repositories";
-// import NotFoundPage from './NotFoundPage';
-// import ErrorBoundary from './ErrorBoundary';
-// import ErrorPage from './ErrorPage';
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SingleRepository from  './SinglePage';
+import Repo from "./Repositories";
+import NotFoundPage from './NotFoundPage';
+import ErrorBoundary from './ErrorBoundary';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Fallback from './Fallback';
 
 function App() {
-  const username = "Ndudiri-Chinaza";
-
   return (
     <>
-      <div className="app">
+      {/* <div className="app">
         <Repo username={username} />
-      </div>
+      </div> */}
+      <ErrorBoundary fallback={Fallback} onReset={() => {}}>
+        {/* <Router> */}
+          <Routes>
+            <Route exact path="/" element={<Repo />} />
+            <Route
+              exact
+              path="/Repository/:id"
+              element={<SingleRepository />}
+            />
+            <Route exact path="*" element={<NotFoundPage />} />
+          
+          </Routes>
+        {/* </Router> */}
+      </ErrorBoundary>
     </>
   );
 }

@@ -1,28 +1,37 @@
-// Implement Error Boundary
-import React, {Component} from "react";
+import React from 'react';
 
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {hasError: false}
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
+  static getDerivedStateFromError(error) {
 
-  static getDerivedStateFromError(error){
-    return {hasError: true};
+    return { hasError: true };
   }
+  componentDidCatch(error, errorInfo) {
 
-  componentDidCatch(error, errorInfo){
-    console.log("Error caught by ErrorBoundary:", error, errorInfo);
+    this.setState({
+      error: error,
+      errorInfo: errorInfo
+    });
+
+    console.error("Uncaught error:", error, errorInfo);
   }
-
   render() {
-    if (this.state.hasError){
-      return <h1>Something went wrong. Try again later.</h1>;
+    if (this.state.hasError) {
+    
+      return (
+        <div className='Wentwrong'>
+          <h2>Something went wrong</h2>
+          <p>Sorry, something went wrong. Please click the 'Reload' button to reload or click on 'Details' to see the error details. If the problem persists, check your internet connection or contact support for assistance.</p>
+          <button className='Reload'onClick={() => window.location.reload()}>Reload</button>
+        </div>
+      );
     }
 
     return this.props.children;
   }
 }
-
 export default ErrorBoundary;
